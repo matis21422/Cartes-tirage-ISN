@@ -1,0 +1,29 @@
+<html>
+<head>
+<script src="brython.js"></script>
+<script src="brython_stdlib.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python">
+from browser import document
+import random
+
+cartes = ['C1','CR']
+n=0
+
+random.shuffle(cartes)
+
+def change(event):
+	global cartes, n
+	document["display"].clear()
+	document["display"].html = "<img src='" + cartes[n] +".png' width='400' />"
+	n = n + 1
+
+document["button1"].bind("click", change)
+</script>
+
+<button id="button1">clic</button>
+<div id="display"></div>
+
+</body>
+</html>
