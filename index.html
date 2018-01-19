@@ -1,0 +1,64 @@
+<html>
+<head>
+<script src="brython.js"></script>
+<script src="brython_stdlib.js"></script>
+<script type="text/python">
+from browser import document, html, alert
+
+def display(text):
+	document["display"].clear()
+	document["display"].html = text
+
+#---------------------------------
+
+import random
+
+cartes = ["C1", "CR", "CD", "CV", "CX", "C9", "C8", "C7"]
+random.shuffle(cartes)
+
+# on affiche la premiere cartes
+display("<img src='" + cartes[0] + ".png' width='400' />")
+
+n = 1
+
+def cartes_obo():
+	global cartes, n
+	display("<img src='" + cartes[n] + ".png' width='400' />")
+	n = n + 1
+	if n == 7:
+		document['cartes'].style.display = 'inline'
+		document['display'].style.display = 'none'
+
+i = 0
+select = ''
+def cartes_select(ev):
+	global i, select
+	select = select + str(ev.target.id)
+	ev.target.style.opacity = '0.5'
+	ev.target.style.cursor = 'not-allowed';
+	i = i + 1
+	if i == 7:
+		alert(select)
+
+document['display'].bind('click',cartes_obo)
+document['cartes'].bind('click',cartes_select)
+</script>
+</head>
+
+<body onload="brython()">
+
+<div id="display" style="display:inline"></div>
+
+<div id="cartes" style="display:none">
+	<img id='C1' dataid='C1' src='C1.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CR' dataid='CR' src='CR.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CD' dataid='CR' src='CD.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CV' dataid='CR' src='CV.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CX' dataid='CR' src='CX.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C9' dataid='CR' src='C9.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C8' dataid='CR' src='C8.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C7' dataid='CR' src='C7.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+</div>
+
+</body>
+</html>
